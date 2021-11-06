@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10_이벤트 속성</title>
+</head>
+<body>
+
+    <h3># 모든 html 속성에 자바스크립트 이벤트 속성을 추가할 수 있다</h3>
+
+    <ul>
+        <li>onclick: 해당 요소를 클릭 했을 때</li>
+        <li>onmouseover: 해당 요소에 마우스가 올라갔을 때</li>
+        <li>onkeydown: 키보드가 눌렸을 때</li>
+        <li>onload: 브라우저가 페이지 로딩을 모두 끝냈을 때</li>
+    </ul>
+
+    <hr>
+
+    <!--console말고도 모든 자바스크립트가 다 들어갈 수 있다-->
+    <input type="text"
+        onkeydown="a = 10; console.log(a);"       
+        onmouseover="console.log('마우스 올라감');"
+        onclick="console.log('클림함');"
+        onload="console.log('페이지 로딩 끝남');"> <br>
+
+    <input type="text" id="test">
+
+    <hr>
+
+    <textarea id="content" cols="30" rows="10"></textarea>
+
+    <script>
+        const test_input = document.getElementById("test");
+        const test_area = document.getElementById("content");
+
+        //자바스크립트로 이벤트 처리 콜백 함수 설정하는 방법1
+                               //event: 이벤트 객체를 받아서 처리 
+        test_input.onkeydown = (event) => {
+            //어느 태그에나 존재하는 기본 동작을 막아준다.
+            //모든 태그에 기본 동작을 막아서 내가 하고싶은데로 할 수 있는 이벤트처리
+            event.preventDefault();   //탭을 막음
+            console.log(event);
+        }
+
+        //콜백 함수 설정 방법2
+        test_area.addEventListener('click', (e) => {
+            console.log(e)
+        });
+    </script>
+    
+</body>
+</html>

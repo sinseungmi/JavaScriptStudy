@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16_Timeout</title>
+    <style>
+        /* 시계 디자인 */
+    </style>
+</head>
+<body>
+
+    <h3># window.setTimeout(callback, millisec)</h3>
+
+    <p>
+        전달한 시간만큼 기다린 후에 콜백 함수를 한 번 실행한다.
+    </p>
+
+    <h3># window.setInterval(callback, millisec)</h3>
+
+    <p>전달한 시간마다 콜백 함수를 실행한다.</p>
+
+    <!--자바스크립트를 이용하여 매 초마다 새로운 시간을 업데이트 해보세요 -->
+    <div class="clock"></div>
+
+    <script>
+
+        // const clock = document.getElementsByClassName('clock')[0];
+        
+        // window.setTimeout(() => {
+
+        //     //window.alert('5초 지남');
+        // }, 5000);
+        
+        (function () {                                    //몇번째 클래스인지 모르니까 인덱스를 지정해줘야함
+            const clock = document.getElementsByClassName('clock')[0];
+            const getMyTime = (now) => {
+                return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+            };
+            const updateClock = () => {
+                clock.innerHTML = getMyTime(new Date());
+            };
+
+            updateClock();
+            window.setInterval(updateClock, 1000);
+
+        })();
+
+
+    //    var clock2 = document.getElementsByClassName('clock')[0];
+
+    //     function clock() {
+    //         var date = new Date();
+    //         var hour = date.getHours();
+    //         var minute = date.getMinutes();
+    //         var second = date.getSeconds();
+            
+    //         clock2.innerHTML = `${hour}:${minute}:${second}`;
+    //     };
+
+    //     setInterval(clock, 1000);
+        
+    
+    </script>
+    
+</body>
+</html>

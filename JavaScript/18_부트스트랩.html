@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18_부트스트랩</title>
+
+    <!-- 부트스트랩 CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!--My Custom CSS -->
+    <style>
+        .btn-default {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Hello, world!</h1>
+
+    <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <a class="btn btn-default" href="#" role="button">Link</a>
+    <button class="btn btn-default" type="submit">Button</button>
+    <input class="btn btn-default" type="button" value="Input">
+    <input class="btn btn-default" type="submit" value="Submit">
+
+    <hr>
+
+    <!-- Standard button -->
+    <button type="button" class="btn btn-default">Default</button>
+
+    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+    <button type="button" class="btn btn-primary">Primary</button>
+
+    <!-- Indicates a successful or positive action -->
+    <button type="button" class="btn btn-success">Success</button>
+
+    <!-- Contextual button for informational alert messages -->
+    <button type="button" class="btn btn-info">Info</button>
+
+    <!-- Indicates caution should be taken with this action -->
+    <button type="button" class="btn btn-warning">Warning</button>
+
+    <!-- Indicates a dangerous or potentially negative action -->
+    <button type="button" class="btn btn-danger">Danger</button>
+
+    <!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+    <button type="button" class="btn btn-link">Link</button>
+
+    <hr>
+
+    <table class="table table-hover">
+        <!-- On rows -->
+        <tr class="active">
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+        </tr>
+        <tr class="success">
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+        </tr>
+        <tr class="warning">
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+        </tr>
+        <tr class="danger">
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+        </tr>
+        <tr class="info">
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+            <td>table content</td>
+        </tr>
+    </table>
+
+    <div class="form-group has-success">
+        <label class="control-label" for="inputSuccess1">Input with success</label>
+        <input type="text" class="form-control" id="inputSuccess1">
+    </div>
+    <div class="form-group has-warning">
+        <label class="control-label" for="inputWarning1">Input with warning</label>
+        <input type="text" class="form-control" id="inputWarning1">
+    </div>
+    <div class="form-group has-error">
+        <label class="control-label" for="inputError1">Input with error</label>
+        <input type="text" class="form-control" id="inputError1">
+    </div>
+    <div class="has-success">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="checkboxSuccess" value="option1">
+                Checkbox with success
+            </label>
+        </div>
+    </div>
+    <div class="has-warning">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="checkboxWarning" value="option1">
+                Checkbox with warning
+            </label>
+        </div>
+    </div>
+    <div class="has-error">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="checkboxError" value="option1">
+                Checkbox with error
+            </label>
+        </div>
+    </div>
+
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default">Left</button>
+        <button type="button" class="btn btn-default">Middle</button>
+        <button type="button" class="btn btn-default">Right</button>
+    </div>
+
+    <hr>
+
+    <!-- Single button -->
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Action <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+        </ul>
+    </div>
+
+    <div class="btn-group dropup">
+        <button type="button" class="btn btn-default">Dropup</button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+        </ul>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40"
+            aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+            <span class="sr-only">40% Complete (success)</span>
+        </div>
+    </div>
+    <div class="progress">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20"
+            aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+            <span class="sr-only">20% Complete</span>
+        </div>
+    </div>
+    <div class="progress">
+        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60"
+            aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+            <span class="sr-only">60% Complete (warning)</span>
+        </div>
+    </div>
+    <div class="progress">
+        <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="80"
+            aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+            <span class="sr-only">80% Complete (danger)</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3># 부트스트랩 그리드 시스템</h3>sm   <div class="container-fluid">sm       <div class="row">sm           <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+            <div class="col-sm-1">.col-sm-1</div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">.col-md-8
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                        <span class="sr-only">40% Complete (success)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">.col-md-6</div>
+            <div class="col-md-6">.col-md-6</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

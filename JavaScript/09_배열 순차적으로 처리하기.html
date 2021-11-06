@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09_배열 순차적으로 처리하기</title>
+    <style>
+        tr.worst {
+            color: red;
+            font-size: 1.3em;
+            font-weight: bolder;
+        }
+        tr.normal {
+            color: black;
+        }
+
+    </style>
+</head>
+<body> 
+
+    <h3># 자바스크립트 스타일로 데이터 처리하기</h3>
+
+    <ul id="out"></ul>
+
+    <table id="failed" border="3">
+        <tr>
+            <th>번호</th>
+            <th>국어</th>
+            <th>영어</th>
+            <th>수학</th>
+            <th>평균</th>
+        </tr>
+    </table>
+    
+    <script>
+         // function 키워드로 생성하지 않는 함수는 맨 위에 있어야 한다
+         // const getRandomScore = function() {
+         //    return parseInt(Math.random() * 101); }
+
+                             //function()에 매개변수 안넣을 수도 있다
+         const getRandomScore = () => parseInt(Math.random() * 101);
+
+
+        //순차적으로 꺼낼 수 있는 모든 것은 forEach로 꺼낼 수 있다.foreach를 돌리면서
+        //내가 원하는 함수로 꺼낼 수 있다
+        //함수만 전달하는건 함수 설계도를 전달. 뒤에 괄호가 붙으면 실행하라는거
+        const numbers = [45, 1, 9, 100, 55, 22, -37];
+        let result = "";
+        
+        //forEach에 사용할 함수를 전달해준다.
+        //배열의 값을 하나씩 순차적으로 해당 함수에 전달한다.
+        //배열이 가진 모든 값을 이용해 순차적으로 리턴 값이 없는 함수를 처리한다
+        numbers.forEach(myFunction);
+        numbers.forEach(makeListItem);
+
+        document.getElementById("out").innerHTML = result;
+
+        //map에 전달한 함수를 이용해 새로운 배열을 생성한다
+        //배열의 모든 요소에 해당 함수를 적용한 새로운 배열을 생성한다
+        //map() 은 '원본리스트' 의 처음 인덱스부터 마지막 인덱스까지 순회하며
+        //현재 인덱스(index)의 아이템(value) 의 데이터를 가공할 수 있고
+        //return을 하면  가공된 데이터를 새로운 리스트의 index에 담게됩니다.
+
+        const map_result = numbers.map(myMapFunction);
+        console.log(map_result);
+
+        const map_result2 = numbers.map(function (value) {
+            return value * 3;
+        });
+        console.log(map_result2);
+
+        const map_result3 = numbers.map(function (value, index) {
+            //return "<li>[" + index + "]" + value + "</li>";
+            return `<li>[${index}] ${value}</li>`;
+            //== Java: String.format("<li>[%s] %s</li>", index, value);
+        });
+        console.log(map_result3);
+
+        map_result3.forEach(function (value) {
+            console.log('value : ',value);
+            document.getElementById("out").innerHTML += value;
+        });
+
+        //filter는 콜백 함수에 지정된 조건에 맞는 요소를 새롭게 반환한다.
+        //filter는 필터로 사용된 함수에서 살아남은 요소만 남기는 기능이다
+        //filter() 메서드는 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.
+        //filter는 결과가 true나 false가 나와야함 
+        const filter_result = numbers.filter((value) => {return value > 40});
+        const filter_result2 = numbers.filter(function (value) {
+            return value % 2 === 0;
+        });
+        const filter_result3 = numbers.filter(value => value > 40);
+        console.log('필터 결과1: ', filter_result);
+        console.log('필터 결과2: ', filter_result2);
+        console.log('필터 결과3: ', filter_result3);
+
+
+        //함수 선언은 자바스크립트에서 가장 먼저 실행된다. (맨 밑에 있더라도)
+        function myFunction(value, index, array) {
+            //forEach가 사용할 함수를 이곳에 정의한다
+            //첫 번째 파라미터로는 값이 도착하고
+            //두 번째 파라미터로는 인덱스가 도착하고
+            //세 번째 파라미터로는 forEach중인 배열이 도착한다
+            //forEach는 Map과 다르게 새로 생성하지 않는다
+
+            console.log(index, '번째 forEach중 입니다');
+            console.log('value: ', value);
+            console.log('index: ', index);
+            console.log('array: ', array);
+            console.log('-------------------------');
+        }
+
+        //Value가 하나일때, 두번째 세번째는 갖다버린다.
+        function makeListItem(value) {
+            result += "<li>" + value + "</li>\n"
+        }
+
+        function myMapFunction(value, index, array) {
+            return value + 10;
+        }
+
+        //function대신 => 를 써도 됨
+
+        // 국/영/수 점수를 가진 랜덤 학생 100명을 자바스크립트 오브젝트로 생성하고
+        // 1. map()을 이용해 모든 학생들의 평균 점수 배열을 생성
+        // 2. filter()를 이용해 평균 점수가 70점 이하인 학생들로 이루어진 배열을 생성
+        // 하여 html 테이블에 출력 (점수가 가장 낮은 학생은 빨간 글씨로 출력)
+  
+        var stu = [];
+
+        function ran() {
+            return parseInt(Math.random() * 101);
+        }
+
+        for (i = 0; i < 100; i++) {
+            stu[i] = {
+                kor: ran(),
+                eng: ran(),
+                math: ran(),
+            }
+        };
+
+        
+        stu.map(function (value,index,array) {
+            return array[index]['age'] = (value.kor + value.kor + value.eng) / 3.0;
+        });
+        
+        var f = stu.filter(function(value) {
+            return value.age <= 70;
+        });
+
+        var lowest = 0;
+
+        var result2 = f.reduce(function(acc, value) {
+            return value.age < acc ? value.age : acc;
+        },100);
+        
+        f.forEach(function(value, index) {
+            var str = `<tr id="">
+                        <td>${index}</td>
+                        <td>${value.kor}</td>
+                        <td>${value.eng}</td>
+                        <td>${value.math}</td>
+                        <td>${value.age}</td>
+                        </tr>`;
+            document.getElementById('failed').innerHTML += str ;
+        });
+
+
+        
+
+        //자바스크립트의 배열은 변수 외에도 객체와 함수도 담을 수 있다!!!!
+        var students = [];        
+        var stu_avgs;
+
+        for (var i = 0; i < 100; ++i) {
+            students.push({
+                stu_num: 1 + i,
+                kor: getRandomScore(),
+                eng: getRandomScore(),
+                math: getRandomScore()    
+            //id(key) : name(value)
+            });
+        }
+
+                                //student 인스턴스가 들어온다
+        // stu_avgs = students.map((student) => {
+        //     return (student.kor + student.eng + student.math) / 3.0
+        // });
+        // console.log(stu_avgs);
+
+        //함수 리턴해도되고 안해도되고. 자바랑 똑같.
+        students.forEach((value, index, array) => { 
+            array[index]['avg'] = (value.kor + value.eng + value.math) / 3.0;
+                       //여기서 id생성 가능
+        });
+
+        /*
+        -콜백함수
+        자바스크립트에서 함수는 object이다. 이 때문에 함수는 다른 함수의 인자로 쓰일 수도, 
+        어떤 함수에 의해 리턴될 수도 있다. 
+        이러한 함수를 고차 함수 higher-order functions 라 부르고 인자로 넘겨지는 함수를 
+        콜백 함수 callback function 라고 부른다.
+        */
+        
+        const failed = students.filter((stu) => {
+            return stu.avg <= 70;
+        });
+
+        console.log(failed);
+
+
+        // reduce를 이용해 가장 낮은 점수를 구하고
+        // 해당 점수인 학생들의 출력 색상을 빨간색으로 바꿔보세요  
+        const worst_avg = failed.reduce((worst, stu) => { return worst < stu.avg ? worst : stu.avg;}, 100);
+        console.log(worst_avg); //하나의 값만 도출됨
+
+
+        // const failed_table_rows = failed.map((stu) => {
+        //     return `<tr class="${stu.avg == worst_avg ? 'worst' : 'normal'}">
+        //                 <td>${stu.stu_num}</td>
+        //                 <td>${stu.kor}</td>
+        //                 <td>${stu.eng}</td>
+        //                 <td>${stu.math}</td>
+        //                 <td>${stu.avg}</td>
+        //             </tr>`;
+        // });
+
+        document.getElementById("failed").innerHTML += 
+            failed_table_rows.reduce((acc, row) => acc + row, '');
+        //'' + row[0] + row[1] + row[2] ..
+
+        /*
+            # reduce(callback, init_value)
+              - reduce는 배열의 각 요소에 대해 callback을 실행하며 단 1개의 출력 결과를 만듭니다.
+              - 배열 내의 모든 내용들을 순차적으로 사용해 하나의 결과를 생성한다
+              - callback(acc, value, index, arr) 
+                acc: accumulator, 누산기, 값이 누적되는 곳
+                value: 순차적으로 꺼낸 값
+                ...
+        */
+        var reduce_result = numbers.reduce((acc, value) => acc - value, 0);  
+        //0 - numbers[0] - numbers[1] - numbers[2] ..
+        console.log('reduce_result: ', reduce_result);
+
+        /*
+            # every
+            - 배열 내의 모든 요소들이 테스를 통과하는지 검사한다
+            - every 함수는 배열의 모든 요소가 callbackFunction 에서 true를 리턴해야 true를 리턴,
+            하나라도 false가 떨어지면 false를 리턴합니다.
+        
+        */
+       //ex : numbers의 값이 모두 양수인지 검사하고 싶을 때
+       var test_result = numbers.every(value => value >= 0);
+       console.log('numbers의 값이 모두 양수인가요?',  test_result);
+         
+    </script>
+    
+
+</body>
+</html>

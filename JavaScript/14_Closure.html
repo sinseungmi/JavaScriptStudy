@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14_Closure</title>
+</head>
+<body>
+
+    <h3># 자바스크립트에서 전역 변수는 최대한 자제하는 것이 좋다</h3>
+
+    <p>
+        ()를 사용해 변수의 영역을 명확하게 지정하여 사용하는 것이 좋다.
+    </p>
+
+    <script>
+        const test = (function () {
+            let count = 0;
+            return {
+                add: () => count += 1,
+                minus: () => {
+                    count -= 1
+                    return count < 0 ? count = 0 : count;
+                },
+            };
+        })();
+
+        console.log(test.add());
+        console.log(test.add());
+        console.log(test.add());
+        console.log(test.minus());
+        console.log(test.minus());
+        console.log(test.minus());
+        console.log(test.minus());
+        console.log(test.minus());
+        console.log(test.minus());
+
+
+        //리턴에 함수가 들어갈수도 있고 오브젝트가 들어갈수도 있고 아주 자유롭다
+
+        //self-invoke funtion: 함수를 선언한 다음 바로 실행시켜버리는 방식
+        //자기만의 영역을 잡기위해 사용한다(closure)
+        const add = (function functionA() {
+            let x = 10;  //한번쓰고 버릴 함수?변수?(선언은해서 메모리에 잡혀있음) (이 변수는 최초에 딱 한번만 실행됨!)
+            console.log("Hi!!");
+
+            return () => x += 1
+
+           // return x;   //한번쓰고 버릴 함수를 리턴으로 변화시켜서 쓸 수 있다
+        })();
+          //뒤에 소괄호 붙는 이유는 지 혼자 실행시킬라고(이름 없는 이유도 한번쓰고 버리기 때문에)
+
+        //  functionA(); //존재하지 않는 함수
+        //  console.log(x);  //존재하지 않는 변수
+
+        //x에 절대로 직접 접근할 수 없지만 값을 변화시킬 수는 있음. (private 효과)
+        console.log(add());
+        console.log(add());
+        console.log(add());
+        console.log(add());
+
+    </script>
+    
+</body>
+</html>

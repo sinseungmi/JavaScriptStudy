@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Document Object Model</title>
+</head>
+<body>
+
+    <h3># DOM (Document Object Model)</h3>
+
+    <!--자바스크립트는 웹 페이지에 움직임을 준다(모든 것을 수정함으로써) -->
+
+    <ul>
+        <li>웹 브라우저는 html코드의 구조를 해석하여 document 객체를 생성한다</li>
+        <li>자바스크립트를 통해 html문서의 모든 것을 수정할 수 있다</li>
+        <li>html문서의 css, 속성, 내용, 태그, 이벤트 ... 등등</li>
+    </ul>
+
+    <h3># 원하는 HTML요소를 찾는 메서드들</h3>
+
+    <!--
+         getElementsByTagName, getElementsByClassName 는 여러개 가져온다는 소리. s안붙은 id는 당연히 하나만 가져옴.
+         s붙은 애들은 배열은 아닌데 쨌든 여러개 있단 소리(인덱스로 접근 가능)
+    -->
+    <ul>
+        <li>document.getElementById(id)</li>
+        <li>document.getElementsByTagName(tag_name)</li>
+        <li>document.getElementsByClassName(class_name)</li>
+        <li>document.querySelector(css_selector)</li>
+        <li>document.querySelectorAll(css_selector)</li>
+    </ul>
+
+    <h3># 찾은 HTML요소를 변경하는 방법</h3>
+
+    <ul>
+        <li>element.innerHTML : 요소의 태그 사이 내용</li>
+        <li>element.attribute : 요소의 속성에 접근1</li>
+        <li>element.setAttribute(name, value) : 요소의 속성에 접근2</li>
+        <li>element.style.property : 요소의 스타일 속성에 접근</li>
+    </ul>
+
+    <p id="" class="">babo</p>
+    <p id="" class="warning">babo</p>
+    <p id="" class="warning">babo</p>
+    <p id="" class="">babo</p>
+    <p id="" class="">babo</p>
+    <p id="" class="">babo</p>
+    <div id="" class=""></div>
+    <div id="" class="warning">not babo</div>
+    <div id="" class="">not babo</div>
+
+    <button id="warning_btn">경고!</button>
+    <button id="warning_off">경고 끄기</button>
+
+    <hr>
+
+    <img id="main_img" src="../assets/image/IMG_1198.jpeg" width="300"> <br>
+    <button id="prev_img">Prev</button>
+    <button id="next_img">Next</button>
+
+    <script>
+        const main_img = document.querySelector('#main_img');
+        const img_path_list = [
+            '../assets/image/IMG_1198.jpeg',
+            '../assets/image/IMG_1204.jpeg',
+            '../assets/image/클래스.png',
+        ];
+        let img_index = 0;
+
+
+        // document : 웹브라우저가 HTML문서를 해석하여 생성해놓은 웹페이지 구조
+        const warningBtn = document.getElementById('warning_btn');
+        const warningBtnOff = document.getElementById('warning_off');
+        
+        //const warningNodes = document.getElementsByTagName('li');
+       const warningNodes = document.querySelectorAll('.warning');
+                                                                 //이거 안하면 대입안돼서 해줘야함
+       const prevImage = () => {return img_path_list[--img_index < 0 ? (img_index = img_path_list.length - 1) : img_index]};
+       const nextImage = () => img_path_list[++img_index % img_path_list.length];
+                                //이거는 함수!!!부르지 않는 이상 실행되지 않는다!! 자바의 메서드랑 똑같다 생각해 제발ㅠㅠ 
+
+       /*
+       while ((ch = next()) != null) {
+           위에꺼가 뭐 대충 이런 느낌이다~
+       }
+       */
+
+        document.querySelector('#prev_img').addEventListener('click', (e) => {
+            //main_img.src=  prevImage();
+            main_img.setAttribute('src', prevImage());  //위에서 함수를 정의해서 prevImage에 저장했기 때문에 ()가 붙는거임!!!
+
+            // main_img.src = img_path_list[
+            // --img_index < 0 ? img_path_list.length - 1 : img_index];
+        });
+
+        document.querySelector('#next_img').addEventListener('click', (e) => {
+            main_img.setAttribute('src', nextImage());
+           
+            //main_img.src = nextImage();
+            // main_img.src = img_path_list[++img_index % img_path_list.length];
+        });
+
+
+       warningBtnOff.addEventListener('click', (e) => {
+            warningOff();
+       });
+
+
+       function warningOff() {
+           Array.from(nodes).forEach((node) => {
+                    node.style.backgroundColor = 'white';
+                    node.style.padding = '0px';
+                    node.style.border = 'none';
+                }); 
+       }
+
+
+       /*
+       warningBtnOff.addEventListener('click', (e) => {
+            const nodes = document.getElementsByClassName('warning');
+
+            Array.from(nodes).forEach((node) => {
+                node.style.backgroundColor = 'white';
+                node.style.padding = '0px';
+                node.style.border = 'none';
+            });
+       });
+       */
+
+       //warningBtn.addEventListener('click', function(event)
+        warningBtn.addEventListener('click', (e) => {
+            makeWarning();     //만약에 이벤트 객체가 필요할 수도 있기 때문에 함수로 정의.(makeWarning(e))
+        });
+
+        function makeWarning() {
+            // nodes는 Array가 아닌 Array 사촌(HTMLCollection)이다.
+            // (forEach가 구현되어 있지 않음)
+            //const nodes = document.getElementsByClassName('warning');
+
+
+            //forEach를 사용하고 싶다면 Array.from()으로 배열로 변환할 수 있다
+            Array.from(warningNodes).forEach((node) => {
+                node.style.backgroundColor = 'yellow';
+                node.style.padding = '15px';
+                node.style.border = 'dashed 3px black';
+            });
+            
+            /*
+            for (i = 0; nodes.length; i++){
+                nodes[i].style.backgroundColor = 'yellow';
+                nodes[i].style.padding = '15px';
+                nodes[i].style.border = 'dashed 3px black';
+            }
+            */
+        }
+    </script>
+    
+</body>
+</html>
