@@ -1,2 +1,2 @@
 # JavaScriptStudy
-> JavaScript를 통해 학습한 내용을 정리
+> JavaScript 수업을 통해 학습한 내용 정리
